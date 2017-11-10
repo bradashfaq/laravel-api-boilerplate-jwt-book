@@ -1,4 +1,7 @@
 # LaravelAPIBoilerplateJWTBook
+
+[![Build Status](https://travis-ci.org/Tony133/LaravelAPIBoilerplateJWTBook.svg?branch=master)](https://travis-ci.org/Tony133/LaravelAPIBoilerplateJWTBook)
+
 Simple Example Api Rest Book with Laravel 5.5 LTS and Json Web Token
 
 ## Install with Composer
