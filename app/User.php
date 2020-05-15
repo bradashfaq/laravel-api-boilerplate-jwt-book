@@ -2,11 +2,13 @@
 
 namespace App;
 
-use Hash;
-use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Hash;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'username', 'email', 'password',
     ];
 
     /**
@@ -29,19 +31,31 @@ class User extends Authenticatable
     ];
 
     /**
-     * Automatically creates hash for the user password.
+     * The attributes that should be cast to native types.
      *
-     * @param  string  $value
-     * @return void
+     * @var array
      */
-    public function setPasswordAttribute($value)
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
     {
-        $this->attributes['password'] = Hash::make($value);
+        return $this->getKey();
     }
 
-    public function books()
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
     {
-        return $this->hasMany('App\Book');
+        return [];
     }
-
 }

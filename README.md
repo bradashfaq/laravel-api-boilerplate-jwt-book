@@ -1,8 +1,6 @@
-# LaravelAPIBoilerplateJWTBook
+# LaravelApiAuthenticationJWTBook
 
-[![Build Status](https://travis-ci.org/Tony133/LaravelAPIBoilerplateJWTBook.svg?branch=master)](https://travis-ci.org/Tony133/LaravelAPIBoilerplateJWTBook)
-
-Simple Example Api Rest Book with Laravel 5.5 LTS and Json Web Token
+Simple Example Api Rest Book with Laravel 7.x and Json Web Token
 
 ## Install with Composer
 
@@ -10,19 +8,73 @@ Simple Example Api Rest Book with Laravel 5.5 LTS and Json Web Token
     $ curl -s http://getcomposer.org/installer | php
     $ php composer.phar install or composer install
 ```
-## Getting with Curl
+
+## Generate jwt secret key
+
 ```
-    $ curl -H 'content-type: application/json' -v -X GET http://localhost:8000/api/books?token= :token
-    $ curl -H 'content-type: application/json' -v -X GET http://localhost:8000/api/books/:id?token=:token
-    $ curl -H 'content-type: application/json' -v -X POST -d '{"title":"Foo bar","author":"Foo author"}' http://localhost:8000/api/books?token=:token
-    $ curl -H 'content-type: application/json' -v -X PUT -d '{"title":"Foo bar","author":"Foo author"}' http://localhost:8000/api/books/:id?token=:token
-    $ curl -H 'content-type: application/json' -v -X DELETE http://localhost:8000/api/books/:id?token=:token
+    $ php artisan jwt:secret
 ```
+
+## Getting with Curl Books
+
+```
+    $ curl -H 'content-type: application/json' -v -X GET http://127.0.0.1:8000/api/books -H 'Authorization: Bearer [:token]'
+    $ curl -H 'content-type: application/json' -v -X GET http://127.0.0.1:8000/api/books/:id -H 'Authorization: Bearer [:token]'
+    $ curl -H 'content-type: application/json' -v -X POST -d '{"title":"Foo bar","description":"Lorem ipsum", "category": 2}' http://127.0.0.1:8000/api/books -H 'Authorization: Bearer [:token]'
+    $ curl -H 'content-type: application/json' -v -X PUT -d '{"title":"Foo bar","description":"Lorem ipsum"}' http://127.0.0.1:8000/api/books/:id -H 'Authorization: Bearer [:token]'
+    $ curl -H 'content-type: application/json' -v -X DELETE http://127.0.0.1:8000/api/books/:id -H 'Authorization: Bearer [:token]'
+```
+
+## Getting with Curl Categories
+
+```
+    $ curl -H 'content-type: application/json' -v -X GET http://127.0.0.1:8000/api/categories -H 'Authorization: Bearer [:token]'
+    $ curl -H 'content-type: application/json' -v -X GET http://127.0.0.1:8000/api/categories/:id -H 'Authorization: Bearer [:token]'
+    $ curl -H 'content-type: application/json' -v -X POST -d '{"book_id":"2","name":"Foo Bar"}' http://127.0.0.1:8000/api/categories -H 'Authorization: Bearer [:token]'
+    $ curl -H 'content-type: application/json' -v -X PUT -d '{"book_id":"2","name":"Foo Bar"}' http://127.0.0.1:8000/api/categories/:id -H 'Authorization: Bearer [:token]'
+    $ curl -H 'content-type: application/json' -v -X DELETE http://127.0.0.1:8000/api/categories/:id -H 'Authorization: Bearer [:token]'
+```
+
 ## User Registration with Curl
-```	
-	$ curl  -H 'content-type: application/json' -v -X POST -d '{"name":"tony","email":"tony_admin@lavarel.com","password":"admin"}' http://localhost:8000/api/auth/signup
+
 ```
+    $ curl  -H 'content-type: application/json' -v -X POST -d '{"name":"tony","email":"tony_admin@laravel.com","password":"secret"}' http://127.0.0.1:8000/api/auth/register
+```
+
 ## User Authentication with Curl
+
 ```
-	$ curl  -H 'content-type: application/json' -v -X POST -d '{"email":"tony_admin@lavarel.com","password":"admin"}' http://localhost:8000/api/auth/login
+    $ curl  -H 'content-type: application/json' -v -X POST -d '{"email":"tony_admin@laravel.com","password":"secret"}' http://127.0.0.1:8000/api/auth/login
+```
+
+## Get the logged in user with Curl
+
+```
+    $ curl  -H 'content-type: application/json' -v -X GET http://127.0.0.1:8000/api/auth/me?token=[:token]
+```
+
+## User Logout with curl
+
+```
+    $ curl  -H 'content-type: application/json' -v -X GET http://127.0.0.1:8000/api/auth/logout?token=[:token]
+
+```
+
+## Refresh token with curl
+
+```
+    $ curl  -H 'content-type: application/json' -v -X GET http://127.0.0.1:8000/api/auth/refresh?token=[:token]
+
+```
+
+## User Forgot Password with Curl
+
+```
+    $ curl -H 'content-type: application/json' -v POST -d '{"email": "tony_admin@laravel.com"}' http://127.0.0.1:8000/api/auth/forgot
+```
+
+## User Change Password with Curl
+
+```
+    $ curl -H 'content-type: application/json' -v POST -d '{"email": "tony_admin@laravel.com", "password": "secret"}' http://127.0.0.1:8000/api/auth/change?token=[:token]
 ```

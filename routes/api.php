@@ -1,46 +1,54 @@
 <?php
 
-use Dingo\Api\Routing\Router;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
-/** @var Router $api */
-$api = app(Router::class);
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
+*/
 
-$api->version('v1', function (Router $api) {
-	$api->group(['prefix' => 'auth'], function(Router $api) {
-		$api->post('signup', 'App\\Api\\V1\\Controllers\\SignUpController@signUp');
-		$api->post('login', 'App\\Api\\V1\\Controllers\\LoginController@login');
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
-		$api->post('recovery', 'App\\Api\\V1\\Controllers\\ForgotPasswordController@sendResetEmail');
-		$api->post('reset', 'App\\Api\\V1\\Controllers\\ResetPasswordController@resetPassword');
-	});
+Route::group(['middleware' => 'api'], function($router) {
+    Route::get('/hello', function() {
+        return response()->json([
+            'message' => 'This is a simple example of item returned by your APIs. Everyone can see it.'
+        ])->name('api.hello');
+    });
+});
 
-	$api->group(['middleware' => 'jwt.auth'], function(Router $api) {
-		$api->get('protected', function() {
+Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
+    Route::post('/login', 'Api\Auth\LoginController@store')->name('api.auth.login');
+    Route::post('/register', 'Api\Auth\RegisterController@store')->name('api.auth.register');
+    Route::post('/forgot', 'Api\Auth\ForgotPasswordController@store')->name('api.auth.forgot.password');
+
+    Route::group(['middleware' => 'jwt.auth'], function() {
+        Route::post('/change', 'Api\Auth\ChangePasswordController@store')->name('api.auth.change.password');
+        Route::get('/logout', 'Api\Auth\LogoutController@get')->name('api.auth.logout');
+        Route::get('/me', 'Api\Auth\UserController@show')->name('api.auth.user');
+
+        Route::group(['middleware' => 'jwt.refresh'], function() {
+            Route::get('/refresh', 'Api\Auth\RefreshTokenController@get')->name('api.auth.refresh');
+        });
+
+        Route::get('/protected', function() {
 			return response()->json([
 				'message' => 'Access to this item is only for authenticated user. Provide a token in your request!'
 			]);
 		});
+    });
+});
 
-		$api->get('refresh', [
-			'middleware' => 'jwt.refresh',
-			function() {
-				return response()->json([
-					'message' => 'By accessing this endpoint, you can refresh your access token at each request. Check out this response headers!'
-				]);
-			}
-		]);
-
-		$api->get('books', 'App\Api\V1\Controllers\BookController@index');
-		$api->get('books/{id}', 'App\Api\V1\Controllers\BookController@show');
-		$api->post('books', 'App\Api\V1\Controllers\BookController@store');
-		$api->put('books/{id}', 'App\Api\V1\Controllers\BookController@update');
-		$api->delete('books/{id}', 'App\Api\V1\Controllers\BookController@destroy');
-
-	});
-
-	$api->get('hello', function() {
-		return response()->json([
-			'message' => 'This is a simple example of item returned by your APIs. Everyone can see it.'
-		]);
-	});
+Route::group(['middleware' => 'jwt.auth'], function ($router) {
+    Route::apiResource('books', 'Api\Book\BookController');
+    Route::apiResource('categories', 'Api\Category\CategoryController');
 });
