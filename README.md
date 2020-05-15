@@ -1,5 +1,7 @@
 # LaravelApiAuthenticationJWTBook
 
+[![Build Status](https://travis-ci.org/Tony133/LaravelAPIBoilerplateJWTBook.svg?branch=master)](https://travis-ci.org/Tony133/LaravelAPIBoilerplateJWTBook)
+
 Simple Example Api Rest Book with Laravel 7.x and Json Web Token
 
 ## Install with Composer
