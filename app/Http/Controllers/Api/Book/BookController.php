@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\Book;
 
-use Auth;
 use App\Book;
 use App\Http\Resources\BookResource;
-use Illuminate\Http\Request;
+use App\Http\Requests\Book\BookStoreRequest;
+use App\Http\Requests\Book\BookUpdateRequest;
 use App\Http\Controllers\Controller;
 
 class BookController extends Controller
@@ -26,7 +26,7 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookStoreRequest $request)
     {
         try {
             $book = Book::create([
@@ -64,7 +64,7 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(BookUpdateRequest $request, Book $book)
     {
         try {
 

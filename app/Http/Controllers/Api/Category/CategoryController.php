@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Api\Category;
 use App\Book;
 use App\Category;
 use App\Http\Resources\CategoryResource;
-use Illuminate\Http\Request;
+use App\Http\Requests\Category\CategoryStoreRequest;
+use App\Http\Requests\Category\CategoryUpdateRequest;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
@@ -26,7 +27,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryStoreRequest $request)
     {
         try {
             $category = Category::firstOrCreate([
@@ -64,7 +65,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
         try {
 
