@@ -11,10 +11,22 @@ Simple Example Api Rest Book with Laravel 7.x and Json Web Token
     $ php composer.phar install or composer install
 ```
 
+## Set the application key
+
+```
+   $ php artisan key:generate
+```
+
 ## Generate jwt secret key
 
 ```
     $ php artisan jwt:secret
+```
+
+## Run migrations and seeds
+
+```
+   $ php artisan migrate --seed
 ```
 
 ## Getting with Curl Books
@@ -80,3 +92,7 @@ Simple Example Api Rest Book with Laravel 7.x and Json Web Token
 ```
     $ curl -H 'content-type: application/json' -v POST -d '{"email": "tony_admin@laravel.com", "password": "secret"}' http://127.0.0.1:8000/api/auth/change?token=[:token]
 ```
+
+## Example Created using LaravelAPIBoilerplateJWT
+
+[LaravelAPIBoilerplateJWT](https://github.com/Tony133/LaravelAPIBoilerplateJWT)
