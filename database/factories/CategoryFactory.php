@@ -8,6 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(Category::class, function (Faker $faker) {
     return [
         'name' => $faker->sentence(),
-        'book_id' => App\Book::pluck('id')->random()
+        'book_id' => rand(1,10)
     ];
 });
