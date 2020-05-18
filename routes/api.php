@@ -49,6 +49,6 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
 });
 
 Route::group(['middleware' => 'jwt.auth'], function ($router) {
-    Route::apiResource('books', 'Api\Book\BookController');
-    Route::apiResource('categories', 'Api\Category\CategoryController');
+    Route::apiResource('books', 'Api\Book\BooksController');
+    Route::apiResource('categories', 'Api\Category\CategoriesController');
 });

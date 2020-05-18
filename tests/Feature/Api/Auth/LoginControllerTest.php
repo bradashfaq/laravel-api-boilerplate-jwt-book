@@ -32,7 +32,7 @@ class LoginControllerTest extends TestCase
     {
         $response = $this->client->post(route('api.auth.login'), [
             'json' => [
-                'username' => $this->user->email,
+                'email' => $this->user->email,
                 'password' => $this->user->password,
             ]
         ]);
