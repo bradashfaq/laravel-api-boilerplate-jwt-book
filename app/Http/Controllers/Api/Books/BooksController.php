@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Book;
+namespace App\Http\Controllers\Api\Books;
 
 use App\Book;
 use App\Http\Resources\BookResource;

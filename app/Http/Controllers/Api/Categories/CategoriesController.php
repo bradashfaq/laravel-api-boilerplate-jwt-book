@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Category;
+namespace App\Http\Controllers\Api\Categories;
 
 use App\Book;
 use App\Category;
