@@ -11,6 +11,12 @@ Simple Example Api Rest Book with Laravel 7.x and Json Web Token
     $ php composer.phar install or composer install
 ```
 
+## Set Environment
+
+```
+    $ cp .env.example .env
+```
+
 ## Set the application key
 
 ```
