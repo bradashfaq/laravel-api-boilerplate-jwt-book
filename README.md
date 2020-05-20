@@ -1,4 +1,4 @@
-# LaravelApiAuthenticationJWTBook
+# LaravelAPIBoilerplateJWTBook
 
 [![Build Status](https://travis-ci.org/Tony133/LaravelAPIBoilerplateJWTBook.svg?branch=master)](https://travis-ci.org/Tony133/LaravelAPIBoilerplateJWTBook)
 
