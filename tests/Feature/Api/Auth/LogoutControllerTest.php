@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Api\Auth;
 
-use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -24,8 +23,6 @@ class LogoutControllerTest extends TestCase
         $mock = new MockHandler([new Response(200, [])]);
 		$handler = HandlerStack::create($mock);
 		$this->client = new Client(['handler' => $handler]);
-
-		$this->user = factory(User::class)->create();
 	}
 
 	public function testLogoutUser()

@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Traits\PasswordRandom;
 use App\Notifications\UserForgotPassword;
-use App\User;
+use App\Models\User;
 use Notification;
 
 class ForgotPasswordController extends Controller

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Books;
 
-use App\Book;
+use App\Models\Book;
 use App\Http\Resources\BookResource;
 use App\Http\Requests\Book\BookStoreRequest;
 use App\Http\Requests\Book\BookUpdateRequest;

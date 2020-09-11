@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\Categories;
 
-use App\Book;
-use App\Category;
+use App\Models\Book;
+use App\Models\Category;
 use App\Http\Resources\CategoryResource;
 use App\Http\Requests\Category\CategoryStoreRequest;
 use App\Http\Requests\Category\CategoryUpdateRequest;

@@ -3,7 +3,7 @@
 namespace Tests\Feature\Api\Auth;
 
 use Hash;
-use App\User;
+use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -26,7 +26,7 @@ class RefreshControllerTest extends TestCase
         $handler = HandlerStack::create($mock);
         $this->client = new Client(['handler' => $handler]);
 
-		$this->user = factory(User::class)->create();
+		$this->user = User::factory()->times(1)->create();
     }
 
     public function testRefreshToken()

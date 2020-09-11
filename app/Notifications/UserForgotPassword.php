@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\User;
+use App\Models\User;
 
 class UserForgotPassword extends Notification
 {
@@ -44,7 +44,7 @@ class UserForgotPassword extends Notification
     {
         return (new MailMessage)
                     ->from($this->user->email)
-                    ->line('This is the new password: '. $this->newPassword);
+                    ->line("This is the new password: {$this->newPassword}");
     }
 
     /**

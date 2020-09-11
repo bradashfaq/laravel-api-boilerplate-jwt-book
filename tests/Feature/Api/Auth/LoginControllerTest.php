@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Api\Auth;
 
-use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -24,16 +23,14 @@ class LoginControllerTest extends TestCase
         $mock = new MockHandler([new Response(200, [])]);
 		$handler = HandlerStack::create($mock);
 		$this->client = new Client(['handler' => $handler]);
-
-		$this->user = factory(User::class)->create();
 	}
 
     public function testLoginUser()
     {
         $response = $this->client->post(route('api.auth.login'), [
             'json' => [
-                'email' => $this->user->email,
-                'password' => $this->user->password,
+                'email' => 'tony_admin@example.com',
+                'password' => 'secret123',
             ]
         ]);
 

@@ -27,17 +27,17 @@ Route::group(['middleware' => 'api'], function($router) {
 });
 
 Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
-    Route::post('/login', 'Api\Auth\LoginController@store')->name('api.auth.login');
-    Route::post('/register', 'Api\Auth\RegisterController@store')->name('api.auth.register');
-    Route::post('/forgot', 'Api\Auth\ForgotPasswordController@store')->name('api.auth.forgot.password');
+    Route::post('/login', 'App\Http\Controllers\Api\Auth\LoginController@store')->name('api.auth.login');
+    Route::post('/register', 'App\Http\Controllers\Api\Auth\RegisterController@store')->name('api.auth.register');
+    Route::post('/forgot', 'App\Http\Controllers\Api\Auth\ForgotPasswordController@store')->name('api.auth.forgot.password');
 
     Route::group(['middleware' => 'jwt.auth'], function() {
-        Route::post('/change', 'Api\Auth\ChangePasswordController@store')->name('api.auth.change.password');
-        Route::get('/logout', 'Api\Auth\LogoutController@get')->name('api.auth.logout');
-        Route::get('/me', 'Api\Auth\UserController@show')->name('api.auth.user');
+        Route::post('/change', 'App\Http\Controllers\Api\Auth\ChangePasswordController@store')->name('api.auth.change.password');
+        Route::get('/logout', 'App\Http\Controllers\Api\Auth\LogoutController@get')->name('api.auth.logout');
+        Route::get('/me', 'App\Http\Controllers\Api\Auth\UserController@show')->name('api.auth.user');
 
         Route::group(['middleware' => 'jwt.refresh'], function() {
-            Route::get('/refresh', 'Api\Auth\RefreshTokenController@get')->name('api.auth.refresh');
+            Route::get('/refresh', 'App\Http\Controllers\Api\Auth\RefreshTokenController@get')->name('api.auth.refresh');
         });
 
         Route::get('/protected', function() {
@@ -49,6 +49,6 @@ Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
 });
 
 Route::group(['middleware' => 'jwt.auth'], function ($router) {
-    Route::apiResource('books', 'Api\Books\BooksController');
-    Route::apiResource('categories', 'Api\Categories\CategoriesController');
+    Route::apiResource('books', 'App\Http\Controllers\Api\Books\BooksController');
+    Route::apiResource('categories', 'App\Http\Controllers\Api\Categories\CategoriesController');
 });

@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Tony133/laravel-api-boilerplate-jwt-book.svg?branch=master)](https://travis-ci.org/Tony133/laravel-api-boilerplate-jwt-book)
 
-Simple Example Api Rest Book with Laravel 7.x and Json Web Token
+Simple Example Api Rest Book with Laravel 8.x and Json Web Token
 
 ## Install with Composer
 

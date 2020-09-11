@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Api\Categories;
 
-use App\Category;
+use App\Models\Category;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -16,8 +16,6 @@ class CategoriesControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->category = factory(Category::class)->create();
     }
 
     public function testCategoryIndex()
@@ -29,7 +27,9 @@ class CategoriesControllerTest extends TestCase
 
     public function testCategoryShow()
     {
-        $response = $this->json('GET', route('categories.show', $this->category), [], [], [], [
+        $categories = Category::factory()->create();
+
+        $response = $this->json('GET', route('categories.show', $categories->id), [], [], [], [
             "HTTP_Authorization" => "Bearer mytoken",
         ])->assertStatus(200);
     }
@@ -37,35 +37,35 @@ class CategoriesControllerTest extends TestCase
     public function testCategoryStore()
     {
         $data = [
-            'book_id'  => $this->category->book_id,
-            'name' => $this->category->name,
-            'updated_at' => $this->category->updated_at,
-            'created_at' => $this->category->created_at
+            'book_id'  => "2",
+            'name' => "Categories #1",
         ];
 
         $response = $this->json('POST', route('categories.store'), $data, [], [], [
             "HTTP_Authorization" => "Bearer mytoken",
-        ])->assertStatus(200);
+        ])->assertStatus(201);
 	}
 
     public function testCategoryUpdate()
     {
+        $categories = Category::factory()->create();
+
         $data = [
-            'id' => $this->category->id,
-            'book_id'  => $this->category->book_id,
-            'name' => $this->category->name,
-            'updated_at' => $this->category->updated_at,
-            'created_at' => $this->category->created_at
+            'id' => "4",
+            'book_id'  => "2",
+            'name' => "Categories #2",
         ];
 
-        $this->json('PUT', route('categories.update', $this->category->id), $data, [], [], [
+        $this->json('PUT', route('categories.update', $categories->id), $data, [], [], [
             "HTTP_Authorization" => "Bearer mytoken",
         ])->assertStatus(200);
     }
 
     public function testCategoryDelete()
     {
-        $this->json('DELETE', route('categories.destroy', $this->category), [], [], [], [
+        $categories = Category::factory()->create();
+
+        $this->json('DELETE', route('categories.destroy', $categories->id), [], [], [], [
             "HTTP_Authorization" => "Bearer mytoken",
         ])->assertStatus(204);
     }

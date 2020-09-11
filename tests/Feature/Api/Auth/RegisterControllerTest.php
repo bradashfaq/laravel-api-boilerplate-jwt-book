@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Api\Auth;
 
-use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -16,16 +15,14 @@ class RegisterControllerTest extends TestCase
 	protected function setUp(): void
 	{
 		parent::setUp();
-
-		$this->user = factory(User::class)->create();
 	}
 
 	public function testRegistrationUser()
 	{
 		$data = [
-			'name'  => $this->user->name,
+			'name'  => 'tony',
 			'email' => 'tony_admin@laravel.it',
-			'password' => $this->user->password
+			'password' => 'secret123'
 		];
 
 		$response = $this->json('POST', route('api.auth.register'), $data)->assertJson([

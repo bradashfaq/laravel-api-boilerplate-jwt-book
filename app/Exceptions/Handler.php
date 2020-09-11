@@ -14,7 +14,6 @@ use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
-
 class Handler extends ExceptionHandler
 {
     /**
@@ -35,6 +34,17 @@ class Handler extends ExceptionHandler
         'password',
         'password_confirmation',
     ];
+
+
+    /**
+     * Register the exception handling callbacks for the application.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
 
     /**
      * Report or log an exception.

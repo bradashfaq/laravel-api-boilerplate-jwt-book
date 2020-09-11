@@ -1,5 +1,8 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\Book;
 use Illuminate\Database\Seeder;
 
 class BooksTableSeeder extends Seeder
@@ -11,6 +14,6 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Book::class, 5)->create();
+        Book::factory()->times(5)->create();
     }
 }
